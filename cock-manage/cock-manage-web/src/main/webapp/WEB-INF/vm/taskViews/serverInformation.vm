@@ -1,0 +1,83 @@
+#PageHeader
+
+<!-- /section:basics/sidebar -->
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <span href="#">服务器运行信息</span>
+                </li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <div class="row">
+                        <!-- #section:pages/pricing.large -->
+
+                        #foreach($item in $listServers)
+                        <div class="col-xs-6 col-sm-3 pricing-box">
+                            <div class="widget-box widget-color-orange">
+                                <div class="widget-header">
+                                    <h5 class="widget-title bigger lighter">服务器IpPort:<span style="color: green;">$!item.ipPort</span></h5>
+                                </div>
+                                <div class="widget-body">
+                                    <div class="widget-main" style="text-align: center;">
+                                        <div>
+                                            <ul class="list-unstyled spaced2">
+                                                <li>
+                                                    <i class="menu-icon fa fa-desktop green"></i>
+                                                    运行状态:<span style="color: green">$!item.status</span>
+                                                </li>
+                                                <li>
+                                                    <i class="menu-icon fa fa-desktop green"></i>
+                                                    当前总任务数量:<span style="color: green">$!item.totalTaskNums</span>
+                                                </li>
+
+                                                <li>
+                                                    <i class="menu-icon fa fa-desktop green"></i>
+                                                    正运行任务数量:<span style="color: green">$!item.runingTaskNums</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <hr />
+                                    </div>
+
+                                    <div>
+                                        <a href="#" class="btn btn-block btn-warning">
+                                            <span class="taskListSpan" ipPort="$!item.ipPort">点击查看任务列表</span>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        #end
+                        <!-- /section:pages/pricing.large -->
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+
+#PageFooter
+
+<script type="text/javascript">
+    $(function(){
+            $(".taskListSpan").click(function () {
+               var ipPort = $(this).attr("ipPort");
+               var url = '${request.contextPath}/tasksInServer.htm?'+"ipPort="+ipPort;
+               window.location.href = url;
+            });
+    });
+</script>

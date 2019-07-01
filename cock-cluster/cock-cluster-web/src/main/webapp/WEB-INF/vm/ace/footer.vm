@@ -1,0 +1,152 @@
+        <div class="footer">
+            <div class="footer-inner">
+                <!-- #section:basics/footer -->
+                <div class="footer-content">
+                                <span class="bigger-120">
+                                    <span class="blue bolder">Ace</span>
+                                    凤凰金融 &copy; 2019-2099
+                                </span>
+
+                    &nbsp; &nbsp;
+                    <span class="action-buttons">
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i>
+                                    </a>
+
+                                    <a href="#">
+                                        <i class="ace-icon fa fa-rss-square orange bigger-150"></i>
+                                    </a>
+                                </span>
+                </div>
+
+                <!-- /section:basics/footer -->
+            </div>
+        </div>
+
+        <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+            <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+        </a>
+</div><!-- /.main-container -->
+<!-- basic scripts -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='${request.contextPath}/resources/assets/js/jquery.js'>"+"<"+"/script>");
+</script>
+
+<script type="text/javascript">
+    if('ontouchstart' in document.documentElement) document.write("<script src='${request.contextPath}/resources/assets/js/jquery.mobile.custom.js'>"+"<"+"/script>");
+</script>
+<script src="${request.contextPath}/resources/assets/js/bootstrap.js"></script>
+
+<script src="${request.contextPath}/resources/assets/js/dataTables/jquery.dataTables.js"></script>
+<script src="${request.contextPath}/resources/assets/js/dataTables/jquery.dataTables.bootstrap.js"></script>
+<script src="${request.contextPath}/resources/assets/js/dataTables/extensions/TableTools/js/dataTables.tableTools.js"></script>
+<script src="${request.contextPath}/resources/assets/js/dataTables/extensions/ColVis/js/dataTables.colVis.js"></script>
+
+<!-- ace scripts -->
+<script src="${request.contextPath}/resources/assets/js/ace/elements.scroller.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.colorpicker.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.fileinput.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.typeahead.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.wysiwyg.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.spinner.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.treeview.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.wizard.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.aside.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.ajax-content.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.touch-drag.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.sidebar.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.sidebar-scroll-1.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.submenu-hover.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.widget-box.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.settings.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.settings-rtl.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.settings-skin.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.widget-on-reload.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.searchbox-autocomplete.js"></script>
+<script src="${request.contextPath}/resources/assets/js/jquery.pagination.js"></script>
+
+<script type="text/javascript">
+    var pageSize = 1//设置每页显示条数
+    var total = 9;//数据总条数
+    function pagination() {
+        $("#Pagination").pagination(total, {
+            callback : PageCallback,
+            prev_text : '上一页',
+            next_text : '下一页',
+            items_per_page : pageSize,
+            num_display_entries : 5, //连续分页主体部分显示的分页条目数
+            num_edge_entries : 1
+            //两侧显示的首尾分页的条目数
+        })
+    }
+
+    //前一个表示您当前点击的那个分页的页数索引值，后一个参数表示装载容器。
+    function PageCallback(index, jq) {
+        LoadData(index);
+    }
+    function LoadData(pageIndex) {
+
+    }
+
+
+    $(function(){
+        LoadData(0);//分页初始化
+        pagination();//分页展示
+
+
+        //弹出框
+        $("#deleteTask").click(function(){
+            var dialog = jDialog.alert('确认！',{},{
+                showShadow: false,// 不显示对话框阴影
+                buttonAlign : 'center',
+                events : {
+                    show : function(evt){
+                        var dlg = evt.data.dialog;
+                    },
+                    close : function(evt){
+                        var dlg = evt.data.dialog;
+                    },
+                    enterKey : function(evt){
+                        alert('enter key pressed!');
+                    },
+                    escKey : function(evt){
+                        alert('esc key pressed!');
+                        evt.data.dialog.close();
+                    }
+                }
+            });
+        }) ;
+
+        $("#deleteTask").click(function(){
+            var dialog = jDialog.confirm('确认删除此项任务！',{
+                handler : function(button,dialog) {
+                    alert('你点击了确定！');
+                    dialog.close();
+                }
+            },{
+                handler : function(button,dialog) {
+                    alert('你点击了取消！');
+                    dialog.close();
+                }
+            });
+        });
+
+    });
+</script>
+<!-- the following scripts are used in demo only for onpage help and you don't need them -->
+<script type="text/javascript"> ace.vars['base'] = '..'; </script>
+<script src="${request.contextPath}/resources/assets/js/ace/elements.onpage-help.js"></script>
+<script src="${request.contextPath}/resources/assets/js/ace/ace.onpage-help.js"></script>
+<script src="${request.contextPath}/docs/assets/js/rainbow.js"></script>
+<script src="${request.contextPath}/docs/assets/js/language/generic.js"></script>
+<script src="${request.contextPath}/docs/assets/js/language/html.js"></script>
+<script src="${request.contextPath}/docs/assets/js/language/css.js"></script>
+<script src="${request.contextPath}/docs/assets/js/language/javascript.js"></script>
+</body>
+</html>

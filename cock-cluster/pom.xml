@@ -1,0 +1,96 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- 定时器 -->
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.fengjr</groupId>
+    <artifactId>cock-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>cock-cluster</artifactId>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
+	<packaging>pom</packaging>
+	
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			
+			<properties>
+				
+				<!-- 编译环境 -->
+				<env>local</env>
+				
+				<!-- 系统名称 -->
+				<profile.project.name>定时器</profile.project.name>
+				
+				<!-- 日志 -->
+				<profile.logger.level>INFO</profile.logger.level>
+				<profile.logger.sql>false</profile.logger.sql>
+				<profile.logger.sql.show>INFO</profile.logger.sql.show>
+				<profile.logger.file>D:\\cock-cluster.log</profile.logger.file>
+				
+				
+			</properties>
+			
+		</profile>
+		
+	</profiles>
+	
+	<dependencyManagement>
+		
+		<dependencies>
+			
+			<!-- cock-cluster-manager -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-manager</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-cluster-dao -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-dao</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-cluster-domain -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-domain</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-cluster-service -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-service</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+
+			<!-- cock-cluster-rpc -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-rpc</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+		</dependencies>
+		
+	</dependencyManagement>
+	
+	<modules>
+		<module>cock-cluster-web</module>
+		<module>cock-cluster-manager</module>
+		<module>cock-cluster-dao</module>
+		<module>cock-cluster-domain</module>
+		<module>cock-cluster-service</module>
+		<module>cock-cluster-rpc</module>
+		<module>cock-cluster-api</module>
+	</modules>
+
+</project>

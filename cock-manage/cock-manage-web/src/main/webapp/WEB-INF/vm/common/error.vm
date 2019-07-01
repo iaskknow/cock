@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title></title>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<meta http-equiv="pragma" content="no-cache">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+</head>
+<body style="background-color:transparent;text-align:center">
+<div>
+	<div class="alert alert-warning" role="alert" style="font-size:22px">
+		<strong></strong>
+	</div>
+	<div style="margin-top:100px">
+	</div>
+	<div class="panel panel-info jr-panel" style="width:1024px;margin:0 auto">
+		<div class="panel-heading jr-panel-heading" style="text-align:left">
+			<strong>提示信息</strong>
+		</div>
+		<div class="jr-condition">
+			<div class="jr-panel-content">
+				<table>
+				<tr>
+					<td style="width:120px">
+						<img src="$!{jrf-path}/images/12.jpg">
+					</td>
+					<td style="width:904px;text-align:center;padding-left:20px">
+						<div style="width:100%">
+							<h2><span class="glyphicon glyphicon-remove-sign" style="color:red"></span>&nbsp;非法访问&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h2>
+						</div>
+						<div style="margin-top:10px;border-bottom:1px solid #c4e3f3">
+						</div>
+						<div style="margin-top:10px;text-align:left">
+							<h4>原因：该URL地址拒绝浏览器访问方式.
+						</div>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="jumbotron" style="position:absolute;left:0;right:0;bottom:0;height:170px;line-height:170px;margin:0;padding:0;color:#999;font-size:12px">
+</div>
+</body>
+</html>

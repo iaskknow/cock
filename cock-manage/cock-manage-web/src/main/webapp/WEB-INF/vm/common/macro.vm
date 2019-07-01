@@ -1,0 +1,12 @@
+
+
+#macro(PageHeader)
+    #parse('/ace/header.vm')
+#end
+
+#macro(PageFooter)
+    #parse('/ace/footer.vm')
+#end
+
+
+

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<toolbox>
+    
+    <tool>
+        <key>viewTool</key>
+        <scope>application</scope>
+        <class>com.fengjr.cock.manage.service.util.ViewTools</class>
+    </tool>
+    
+    <tool>
+    	<key>moneyFormatTool</key>
+    	<scope>application</scope>
+    	<class>com.fengjr.cock.manage.service.util.MoneyFormatTools</class>
+    </tool>
+    
+    <tool>
+    	<key>dateFormatTool</key>
+    	<scope>application</scope>
+    	<class>com.fengjr.cock.manage.service.util.DateFormatTools</class>
+    </tool>
+   
+</toolbox>

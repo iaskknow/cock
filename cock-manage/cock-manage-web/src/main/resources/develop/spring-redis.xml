@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+		<property name="maxTotal" value="500"/>
+		<property name="maxIdle" value="50"/>
+		<property name="minIdle" value="5"/>
+		<property name="maxWaitMillis" value="30000"/>
+		<property name="testOnBorrow" value="true"/>
+		<property name="testOnReturn" value="true"/>
+		<property name="testWhileIdle" value="true"/>
+	</bean>
+	
+	
+	<bean id="cacheCloudFactory" class="com.fengjr.cachecloud.client.factory.RedisClusterConnectionFactory" init-method="connection" destroy-method="destory">
+		<constructor-arg index="0" ref="jedisPoolConfig" />
+		<constructor-arg index="1" value="${zookeeper.servers}" />
+		<constructor-arg index="2" value="${cloud.cache.clustername}" />
+		<constructor-arg index="3" value="${cloud.cache.token}" />
+	</bean>
+    
+	<bean id="redisClient" class="com.fengjr.cachecloud.client.cache.CachecloudClient" >
+		<constructor-arg index="0" ref="cacheCloudFactory" />
+	</bean>
+
+</beans>

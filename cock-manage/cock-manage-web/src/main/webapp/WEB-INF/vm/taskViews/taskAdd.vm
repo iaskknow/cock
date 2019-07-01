@@ -1,0 +1,441 @@
+#PageHeader
+
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <span href="#">添加定时任务</span>
+                </li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- /section:basics/content.breadcrumbs -->
+        <div class="page-content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <form class="form-horizontal" id="formTask" role="form">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 任务名称 </label>
+                            <div class="col-sm-8">
+                                <input type="text"  placeholder="定时任务名称" id="jobName" name="taskName" class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobNameSpan" class="invalidSpan"> 任务接口名称不能为空 </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right">任务接口类型</label>
+                            <div class="col-sm-8">
+                                <span class="radio" onclick="httpChange()">
+								     <label>
+											<input name="protocolType" id="interfaceTypeHttp" value="HTTP" type="radio" class="ace"
+                                                   checked="checked"/>
+											<span class="lbl"> HTTP接口</span>
+                                     </label>
+								</span>
+
+                                <span class="radio" onclick="dubboChange()">
+									 <label>
+											<input name="protocolType" id="interfaceTypeDubbo" value="DUBBO" type="radio" class="ace"/>
+											<span class="lbl"> DUBBO接口</span>
+									 </label>
+								</span>
+                            </div>
+                        </div>
+
+
+                        <div class="http">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right">http连接类型</label>
+                                <div class="col-sm-8">
+                                    <span class="radio" onclick="postChange()">
+                                         <label>
+                                                <input name="httpMethod" value="POST" id="httpMethodPost" type="radio" checked="checked" class="ace"/>
+                                                <span class="lbl"> POST </span>
+                                         </label>
+                                    </span>
+
+                                    <span class="radio" onclick="getChange()">
+                                         <label>
+                                                <input name="httpMethod" value="GET" id="httpMethodGet" type="radio" class="ace"/>
+                                                <span class="lbl"> GET </span>
+                                         </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    http地址 </label>
+                                <div class="col-sm-8">
+                                    <input type="text"  id="httpUrl" name="httpUrl" placeholder="http地址"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="httpUrlSpan" class="invalidSpan"> httpUrl参数匹配 </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="params">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    请求参数 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="httpParams" id="httpParams" placeholder="请求参数(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="dubbo" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口名称 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceName" id="interfaceName" placeholder="dubbo接口名称"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceNameSpan" class="invalidSpan"> 接口名称不能为空 </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口方法 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceMethod" id="interfaceMethod" placeholder="dubbo接口方法"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceMethodSpan" class="invalidSpan"> 接口方法不能为空 </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口参数类型 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceParamType" id="interfaceParamType" placeholder="dubbo接口参数类型(默认String)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    请求参数 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceParams" id="interfaceParams" placeholder="请求参数(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口版本 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceVersion" id="interfaceVersion"  placeholder="dubbo接口版本(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口组 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceGroup" id="interfaceGroup" placeholder="dubbo接口组(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+##                            <div class="form-group">
+##                                <label class="col-sm-4 control-label no-padding-right">dubbo接口类型</label>
+##                                <div class="col-sm-8">
+##													<span class="radio" onclick="straightChange()">
+##														<label>
+##															<input name="interfaceMode" id="interfaceModeStraight" value="straight" type="radio" class="ace"
+##                                                                   checked="checked"/>
+##															<span class="lbl"> 直联接口</span>
+##														</label>
+##													</span>
+##
+##                                                    <span class="radio" onclick="registerChange()">
+##														<label>
+##															<input name="interfaceMode" id="interfaceModeRegistry" value="register" type="radio" class="ace"/>
+##															<span class="lbl"> 注册中心</span>
+##														</label>
+##													</span>
+##                                </div>
+##                            </div>
+
+                            <div class="form-group straight">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo直连/注册中心 地址 </label>
+                                <div class="col-sm-8">
+                                    <input type="text"  name="interfaceAddress" id="interfaceAddress" placeholder="dubbo://+ip或者zookeeper://+ip"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceAddressSpan" class="invalidSpan"> 接口地址不能为空 </small>
+                                </div>
+                            </div>
+
+##                            <div class="register" style="display: none;">
+##                                <div class="form-group">
+##                                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+##                                        注册中心类型 </label>
+##                                    <div class="col-sm-8">
+##                                        <input type="text" name="registryProtocol" id="registryProtocol" placeholder="注册中心类型"
+##                                               class="col-xs-10 col-sm-5"/>
+##                                        <small style="color: red;display: none" id="registryProtocolSpan" class="invalidSpan"> 注册中心类型不能为空 </small>
+##                                    </div>
+##                                </div>
+##
+##
+##                                <div class="form-group">
+##                                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+##                                        注册中心地址 </label>
+##                                    <div class="col-sm-8">
+##                                        <input type="text" name="registryAddress" id="registryAddress" placeholder="注册中心地址"
+##                                               class="col-xs-10 col-sm-5"/>
+##                                        <small style="color: red;display: none" id="registryAddressSpan" class="invalidSpan"> 注册中心地址不能为空 </small>
+##                                    </div>
+##                                </div>
+##                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 超时时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="timeOut" id="timeOut" value="20000"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right">任务调度类型</label>
+                            <div class="col-sm-8">
+                                <span class="radio">
+                                    <label>
+                                        <input name="scheduleType" id="cron" value="CRON" type="radio" onclick="cronChange()" checked="checked" class="ace"/>
+                                        <span class="lbl"> CRON</span>
+                                    </label>
+                                </span>
+
+                                <span class="radio">
+                                    <label>
+                                        <input name="scheduleType" id="simple" value="SIMPLE" onclick="simpleChange()" type="radio" class="ace"/>
+                                        <span class="lbl"> SIMPLE</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="cronChange">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> cron表达式 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="jobCron" id="jobCron"  placeholder="cron表达式"
+                                       class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobCronSpan"> cron表达式不能为空 </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none;" id = "simpleChange">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 任务执行时间间隔 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="jobInterval" id="jobInterval"  placeholder="时间间隔必须大于0秒"
+                                       class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobIntervalSpan"> cron表达式不能为空或者必须大于0秒 </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 开始执行时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="startTime" id="startTime"  placeholder="开始执行时间(选填)"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 结束时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="stopTime" id="stopTime" placeholder="结束时间(选填)"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="clearfix form-actions" id="taskAddButton">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button class="btn" type="button" id="modifyButton">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    确认添加
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    清空表单
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.page-content -->
+    </div>
+</div><!-- /.main-content -->
+
+#PageFooter
+
+
+<script type="text/javascript">
+    function cronChange(){
+        $("#cron").attr("checked",true);
+        $("#simple").attr("checked",false);
+        $("#simpleChange").hide();
+        $("#cronChange").show();
+    }
+    function simpleChange(){
+        $("#simple").attr("checked",true);
+        $("#cron").attr("checked",false);
+        $("#cronChange").hide();
+        $("#simpleChange").show();
+    }
+
+    function httpChange() {
+        $("#interfaceTypeHttp").attr("checked",true);
+        $("#interfaceTypeDubbo").attr("checked",false);
+        $(".dubbo").hide();
+        $(".http").show();
+    }
+
+    function dubboChange() {
+        $("#interfaceTypeHttp").attr("checked",false);
+        $("#interfaceTypeDubbo").attr("checked",true);
+        $(".http").hide();
+        $(".dubbo").show();
+        $("#Params").show();
+    }
+
+    function straightChange() {
+        $("#interfaceModeStraight").attr("checked",true);
+        $("#interfaceModeRegistry").attr("checked",false);
+        $(".register").hide();
+        $(".straight").show();
+    }
+
+    function registerChange() {
+        $("#interfaceModeStraight").attr("checked",false);
+        $("#interfaceModeRegistry").attr("checked",true);
+        $(".straight").hide();
+        $(".register").show();
+    }
+
+    function getChange(){
+        $("#params").hide();
+    }
+
+    function postChange(){
+        $("#params").show();
+    }
+
+    function message(msg){
+        var dialog = jDialog.alert(msg,{},{
+            showShadow: false,// 不显示对话框阴影
+            buttonAlign : 'center',
+            events : {
+                show : function(evt){
+                    var dlg = evt.data.dialog;
+                },
+                close : function(evt){
+                    var dlg = evt.data.dialog;
+                }
+            }
+        });
+    }
+
+    function invalidForm(){
+        var submit = true;
+        $(".invalidSpan").val("");
+        if($("#jobName").val().length == 0){
+            $("#jobNameSpan").show();
+            submit = false;
+        }
+
+        if ($("#cron").attr("checked")){
+            if($("#jobCron").val().length == 0){
+                $("#jobCronSpan").show();
+                submit = false;
+            }
+        }
+        else{
+            if($("#jobInterval").val().length == 0){
+                $("#jobIntervalSpan").show();
+                submit = false;
+            }
+        }
+
+        if($("#interfaceTypeHttp").attr("checked")){
+            //http参数验证
+            if($("#httpUrl").val().length == 0){
+                $("#httpUrlSpan").show();
+                submit = false;
+            }
+        }else{
+            //dubbo参数验证
+            if($("#interfaceName").val().length == 0){
+                $("#interfaceNameSpan").show();
+                submit = false;
+            }
+            if($("#interfaceMethod").val().length == 0){
+                $("#interfaceMethodSpan").show();
+                submit = false;
+            }
+
+            // dubbo 地址参数验证
+            if($("#interfaceAddress").val().length == 0){
+                    $("#interfaceAddressSpan").show();
+                    submit = false;
+            }
+
+        }
+
+        return submit;
+    }
+
+
+    $("#modifyButton").click(function(){
+        var uri = '${request.contextPath}/cock/addTask.htm';
+        var invalid = invalidForm();
+        if(invalid) {
+            var dialog = jDialog.confirm('确认添加定时任务！', {
+                handler: function (button, dialog) {
+                    dialog.close();
+                    $.ajax({
+                        url: uri,
+                        type: "post",
+                        data: $("#formTask").serialize(),
+                        dataType: "json",
+                        success: function (result) {
+                                var msg = result.msg;
+                                message(msg);
+
+                        },
+                        error: function () {
+                            var msg = result.msg;
+                            message(msg);
+                        }
+                    });
+                }
+            }, {
+                handler: function (button, dialog) {
+                    dialog.close();
+                }
+            });
+        }
+    });
+</script>

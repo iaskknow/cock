@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
+    
+    <dubbo:application name="fengjr-trade-finance-manange"/>
+
+    <dubbo:provider timeout="10000" retries="0" threadpool="fixed" threads="512"/>
+
+    <dubbo:registry protocol="zookeeper" address="${zk.pro.url.rw}" />
+
+    <dubbo:protocol name="dubbo" port="-1" />
+
+    <dubbo:registry protocol="zookeeper" address="${zk.pro.url.rw}"/>
+    
+    <dubbo:reference id="financeFundRecordApi" interface="com.fengjr.finance.distribute.api.services.IFinanceFundRecordApi" timeout="7000" version="1.0.0" />
+
+    <dubbo:reference id="userService" interface="com.fengjr.usercenter.api.UserService" timeout="10000" version="2.0.1" />
+    
+    <dubbo:reference id="corporationService" interface="com.fengjr.usercenter.api.CorporationService" timeout="10000" version="2.0.1" />
+	
+	<dubbo:reference id="userCorpService" interface="com.fengjr.usercenter.api.UserCorpService" timeout="10000" version="2.0.1" />
+	
+	<dubbo:reference id="downPlatformBanlanceDetailService" interface="com.fengjr.pay.ceres.dubbo.api.platform.DownPlatformBanlanceDetailService" timeout="10000" version="1.0.0" check="false" />
+	
+	<dubbo:service interface="com.fengjr.finance.manage.api.services.IFinanceRecordApi" ref="financeRecordApi" version="1.0.0" />	
+
+	<dubbo:service interface="com.fengjr.finance.manage.api.services.ICompanyServiceApi" ref="companyServiceApi" version="1.0.0" />
+	
+	<dubbo:service interface="com.fengjr.finance.manage.api.services.IServiceFeeApi" ref="serviceFeeApi" version="1.0.0" />
+	
+	<dubbo:service interface="com.fengjr.finance.manage.api.services.IBatchWithdrawCashApi" ref="batchWithdrawCashApi" version="1.0.0" />
+
+	<dubbo:service interface="com.fengjr.finance.manage.api.services.IAssumedMappingApi" ref="assumedMappingApi" version="1.0.0" />
+
+
+
+</beans>
+
+
+
+
+

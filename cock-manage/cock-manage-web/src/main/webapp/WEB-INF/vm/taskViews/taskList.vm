@@ -1,0 +1,741 @@
+#PageHeader
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <span href="title" id="title">定时任务信息列表</span>
+                </li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- taskList -->
+        <div class="page-content" id="taskList">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- div.dataTables_borderWrap -->
+                            <div>
+                                <table id="" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>任务名称</th>
+                                        <th>corn表达式</th>
+                                        <th class="hidden-480">开始执行时间</th>
+
+                                        <th>
+                                            创建时间
+                                        </th>
+                                        <th class="hidden-480">当前状态</th>
+
+                                        <th>任务操作</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        #foreach($item in $listConfig)
+                                        <tr>
+                                            <td>
+                                                <a href="#">$!item.jobName</a>
+                                            </td>
+                                            <td>$!item.jobCron</td>
+                                            <td class="hidden-480">$!item.startTime</td>
+                                            <td>$!item.creationDate</td>
+
+                                            <td class="hidden-480">
+                                                <span class="label label-sm label-info arrowed arrowed-righ">$!item.jobStatus</span>
+                                            </td>
+                                            <td>
+                                                <div class="hidden-sm hidden-xs action-buttons">
+                                                    <a class="green detailsTask" href="#" value="$!item.id"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130">详情</i>
+                                                    </a>
+
+                                                    <a class="red stopTask" href="#" value="$!item.id"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130">暂停</i>
+                                                    </a>
+
+                                                    <a class="blue restartTask" href="#" value="$!item.id"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130">重启</i>
+                                                    </a>
+
+                                                    <a class="orange modifyTask" href="#" value="$!item.id"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130">修改</i>
+                                                    </a>
+
+                                                    <a class="red deleteTask" href="#" value="$!item.id"
+                                                       class="btn btn-info btn-sm">
+                                                        <i class="ace-icon fa fa-trash-o bigger-130">删除</i>
+                                                    </a>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        #end
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+        <!-- /taskList -->
+
+        <!-- taskDetails taskAdd -->
+        <div class="page-content" id="taskDetails" style="display: none">
+            <div class="row">
+                <div class="col-xs-12">
+                    <!-- PAGE CONTENT BEGINS -->
+                    <form class="form-horizontal" id="formTask" role="form">
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 任务名称 </label>
+                            <div class="col-sm-8">
+                                <input type="text" placeholder="定时任务名称" id="jobName" name="taskName"
+                                       class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobNameSpan" class="invalidSpan">
+                                    任务接口名称不能为空
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right">任务接口类型</label>
+                            <div class="col-sm-8">
+                                <span class="radio" onclick="httpChange()">
+								     <label>
+											<input name="protocolType" id="interfaceTypeHttp" value="HTTP" type="radio"
+                                                   class="ace"
+                                                   checked="checked"/>
+											<span class="lbl"> HTTP接口</span>
+                                     </label>
+								</span>
+
+                                <span class="radio" onclick="dubboChange()">
+									 <label>
+											<input name="protocolType" id="interfaceTypeDubbo" value="DUBBO"
+                                                   type="radio" class="ace"/>
+											<span class="lbl"> DUBBO接口</span>
+									 </label>
+								</span>
+                            </div>
+                        </div>
+
+
+                        <div class="http">
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right">http连接类型</label>
+                                <div class="col-sm-8">
+                                    <span class="radio" onclick="postChange()">
+                                         <label>
+                                                <input name="httpMethod" value="post" id="httpMethodPost"
+                                                       type="radio" checked="checked" class="ace"/>
+                                                <span class="lbl"> post </span>
+                                         </label>
+                                    </span>
+
+                                    <span class="radio" onclick="getChange()">
+                                         <label>
+                                                <input name="httpMethod" value="get" id="httpMethodGet"
+                                                       type="radio" class="ace"/>
+                                                <span class="lbl"> get </span>
+                                         </label>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    http地址 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" id="httpUrl" name="httpUrl" placeholder="http地址"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="httpUrlSpan" class="invalidSpan">
+                                        httpUrl参数匹配
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group" id="params">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    请求参数 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="httpParams" id="httpParams" placeholder="请求参数(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="dubbo" style="display: none;">
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口名称 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceName" id="interfaceName" placeholder="dubbo接口名称"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceNameSpan" class="invalidSpan">
+                                        接口名称不能为空
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口方法 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceMethod" id="interfaceMethod"
+                                           placeholder="dubbo接口方法"
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceMethodSpan"
+                                           class="invalidSpan"> 接口方法不能为空
+                                    </small>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口参数类型 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceParamType" id="interfaceParamType"
+                                           placeholder="dubbo接口参数类型(默认String)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    请求参数 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceParams" id="interfaceParams" placeholder="请求参数(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口版本 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceVersion" id="interfaceVersion"
+                                           placeholder="dubbo接口版本(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo接口组 </label>
+                                <div class="col-sm-8">
+                                    <input type="text" name="interfaceGroup" id="interfaceGroup"
+                                           placeholder="dubbo接口组(选填)"
+                                           class="col-xs-10 col-sm-5"/>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="col-sm-4 control-label no-padding-right">dubbo接口类型</label>
+                                <div class="col-sm-8">
+													<span class="radio" onclick="straightChange()">
+														<label>
+															<input name="interfaceMode" id="interfaceModeStraight"
+                                                                   value="straight" type="radio" class="ace"
+                                                                   checked="checked"/>
+															<span class="lbl"> 直联接口</span>
+														</label>
+													</span>
+
+                                    <span class="radio" onclick="registerChange()">
+														<label>
+															<input name="interfaceMode" id="interfaceModeRegistry"
+                                                                   value="register" type="radio" class="ace"/>
+															<span class="lbl"> 注册中心</span>
+														</label>
+													</span>
+                                </div>
+                            </div>
+
+                            <div class="form-group straight">
+                                <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+                                    dubbo 直连/注册中心 地址 </label>
+                                <div class="col-sm-8">
+                                    <input type="text"  name="interfaceAddress" id="interfaceAddress"
+                                           placeholder=""
+                                           class="col-xs-10 col-sm-5"/>
+                                    <small style="color: red;display: none" id="interfaceAddressSpan"
+                                           class="invalidSpan"> 接口地址不能为空
+                                    </small>
+                                </div>
+                            </div>
+
+##                            <div class="register" style="display: none;">
+##                                <div class="form-group">
+##                                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+##                                        注册中心类型 </label>
+##                                    <div class="col-sm-8">
+##                                        <input type="text" name="registryProtocol" id="registryProtocol"
+##                                               placeholder="注册中心类型"
+##                                               class="col-xs-10 col-sm-5"/>
+##                                        <small style="color: red;display: none" id="registryProtocolSpan"
+##                                               class="invalidSpan"> 注册中心类型不能为空
+##                                        </small>
+##                                    </div>
+##                                </div>
+##
+##
+##                                <div class="form-group">
+##                                    <label class="col-sm-4 control-label no-padding-right" for="form-field-1">
+##                                        注册中心地址 </label>
+##                                    <div class="col-sm-8">
+##                                        <input type="text" name="registryAddress" id="registryAddress"
+##                                               placeholder="注册中心地址"
+##                                               class="col-xs-10 col-sm-5"/>
+##                                        <small style="color: red;display: none" id="registryAddressSpan"
+##                                               class="invalidSpan"> 注册中心地址不能为空
+##                                        </small>
+##                                    </div>
+##                                </div>
+##                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 超时时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="timeOut" id="timeOut" value="20000"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right">任务调度类型</label>
+                            <div class="col-sm-8">
+                                <span class="radio">
+                                    <label>
+                                        <input name="scheduleType" id="cron" value="CRON" type="radio" onclick="cronChange()" checked="checked" class="ace"/>
+                                        <span class="lbl"> CRON</span>
+                                    </label>
+                                </span>
+
+                                <span class="radio">
+                                    <label>
+                                        <input name="scheduleType" id="simple" value="SIMPLE" onclick="simpleChange()" type="radio" class="ace"/>
+                                        <span class="lbl"> SIMPLE</span>
+                                    </label>
+                                </span>
+                            </div>
+                        </div>
+
+                        <div class="form-group" id="cronChange">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> cron表达式 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="jobCron" id="jobCron" id="form-field-1" placeholder="cron表达式"
+                                       class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobCronSpan" class="invalidSpan"> cron表达式不能为空 </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group" style="display: none;" id = "simpleChange">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 任务执行时间间隔 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="jobInterval" id="jobInterval" id="form-field-1" placeholder="时间间隔必须大于0秒"
+                                       class="col-xs-10 col-sm-5"/>
+                                <small style="color: red;display: none" id="jobIntervalSpan" class="invalidSpan"> cron表达式不能为空或者必须大于0秒 </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 开始执行时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="startTime" id="startTime" placeholder="开始执行时间(选填)"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 结束时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="stopTime" id="stopTime" placeholder="结束时间(选填)"
+                                       class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-4 control-label no-padding-right" for="form-field-1"> 结束时间 </label>
+                            <div class="col-sm-8">
+                                <input type="text" name="id" id= "taskId" class="col-xs-10 col-sm-5"/>
+                            </div>
+                        </div>
+
+                        <div class="clearfix form-actions" id="taskModifyButton">
+                            <div class="col-md-offset-5 col-md-7">
+                                <button class="btn" type="button" id="modifyButton">
+                                    <i class="ace-icon fa fa-check bigger-110"></i>
+                                    确认提交
+                                </button>
+
+                                &nbsp; &nbsp; &nbsp;
+                                <button class="btn" type="reset">
+                                    <i class="ace-icon fa fa-undo bigger-110"></i>
+                                    清空表单
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+        <!-- /taskDetails taskAddt -->
+    </div>
+</div><!-- /.main-content -->
+
+#PageFooter
+
+<script type="text/javascript">
+    function cronChange(){
+        $("#cron").attr("checked",true);
+        $("#simple").attr("checked",false);
+        $("#simpleChange").hide();
+        $("#cronChange").show();
+    }
+    function simpleChange(){
+        $("#simple").attr("checked",true);
+        $("#cron").attr("checked",false);
+        $("#cronChange").hide();
+        $("#simpleChange").show();
+    }
+
+    function httpChange() {
+        $("#interfaceTypeHttp").attr("checked", true);
+        $("#interfaceTypeDubbo").attr("checked", false);
+        $(".dubbo").hide();
+        $(".http").show();
+    }
+
+    function dubboChange() {
+        $("#interfaceTypeHttp").attr("checked", false);
+        $("#interfaceTypeDubbo").attr("checked", true);
+        $(".http").hide();
+        $(".dubbo").show();
+        $("#Params").show();
+    }
+
+    function straightChange() {
+        $("#interfaceModeStraight").attr("checked", true);
+        $("#interfaceModeRegistry").attr("checked", false);
+        $(".register").hide();
+        $(".straight").show();
+    }
+
+    function registerChange() {
+        $("#interfaceModeStraight").attr("checked", false);
+        $("#interfaceModeRegistry").attr("checked", true);
+        $(".straight").hide();
+        $(".register").show();
+    }
+
+    function getChange() {
+        $("#params").hide();
+    }
+
+    function postChange() {
+        $("#params").show();
+    }
+
+    function showTaskList(data) {
+        $("#taskId").val(data.id);
+        var protocolType = data.protocolType;
+        $("#taskName").val(data.jobName);
+        if (protocolType == "DUBBO") {
+            $("#timeOut").val(data.dubboConfig.timeout);
+            $("#interfaceTypeHttp").attr('checked', false);
+            $("#interfaceTypeDubbo").attr('checked', true);
+            dubboChange();
+            $("#interfaceName").val(data.dubboConfig.interfaceName);
+            $("#interfaceMethod").val(data.dubboConfig.interfaceMethod);
+            $("#interfaceParamType").val(data.dubboConfig.interfaceParamType);
+            $("#interfaceVersion").val(data.dubboConfig.interfaceVersion)
+            $("#interfaceGroup").val(data.dubboConfig.interfaceGroup);
+            $("#interfaceParams").val(data.dubboConfig.interfaceParams);
+            $("#interfaceAddress").val(data.dubboConfig.interfaceAddress);
+        } else {
+            $("#timeOut").val(data.httpConfig.timeout);
+            $("#interfaceTypeHttp").attr('checked', true);
+            $("#interfaceTypeDubbo").attr('checked', false);
+            httpChange();
+            var httpMethod = data.httpConfig.httpMethod;
+            if (httpMethod == "get") {
+                $("#httpMethodPost").attr('checked', false);
+                $("#httpMethodGet").attr('checked', true);
+                $("#Params").hide();
+            } else {
+                $("#httpMethodGet").attr('checked', false);
+                $("#httpMethodPost").attr('checked', true);
+                $("#Params").show();
+                $("#httpParams").val(data.httpConfig.httpParams);
+            }
+            $("#httpUrl").val(data.httpConfig.httpUrl);
+        }
+
+        var scheduleType = data.scheduleType;
+        if (scheduleType == "CRON") {
+            cronChange();
+            $("#jobCron").val(data.jobCron);
+        } else {
+            simpleChange();
+            $("#jobInterval").val(data.jobInterval);
+        }
+
+        $("#jobCron").val(data.jobCron);
+        $("#startTime").val(data.startTime);
+        $("#stopTime").val(data.stopTime);
+    }
+
+    function message(msg) {
+        var dialog = jDialog.alert(msg, {}, {
+            showShadow: false,// 不显示对话框阴影
+            buttonAlign: 'center',
+            events: {
+                show: function (evt) {
+                    var dlg = evt.data.dialog;
+                },
+                close: function (evt) {
+                    var dlg = evt.data.dialog;
+                }
+            }
+        });
+    }
+
+    function invalidForm() {
+        var submit = true;
+        $(".invalidSpan").val("");
+        if ($("#jobName").val().length == 0) {
+            $("#jobNameSpan").show();
+            submit = false;
+        }
+
+        if ($("#cron").attr("checked")){
+            if($("#jobCron").val().length == 0){
+                $("#jobCronSpan").show();
+                submit = false;
+            }
+        }
+        else{
+            if($("#jobInterval").val().length == 0){
+                $("#jobIntervalSpan").show();
+                submit = false;
+            }
+        }
+
+        if ($("#interfaceTypeHttp").attr("checked")) {
+            //http参数验证
+            if ($("#httpUrl").val().length == 0) {
+                $("#httpUrlSpan").show();
+                submit = false;
+            }
+        } else {
+            //dubbo参数验证
+            if ($("#interfaceName").val().length == 0) {
+                $("#interfaceNameSpan").show();
+                submit = false;
+            }
+            if ($("#interfaceMethod").val().length == 0) {
+                $("#interfaceMethodSpan").show();
+                submit = false;
+            }
+
+            if ($("#interfaceModeStraight").attr("checked")) {
+                // dubbo 直联接口参数验证
+                if ($("#interfaceAddress").val().length == 0) {
+                    $("#interfaceAddressSpan").show();
+                    submit = false;
+                }
+            } else {
+                // dubbo 注册中心参数验证
+                if ($("#registryProtocol").val().length == 0) {
+                    $("#registryProtocolSpan").show();
+                    submit = false;
+                }
+
+                if ($("#registryAddress").val().length == 0) {
+                    $("#registryAddressSpan").show();
+                    submit = false;
+                }
+            }
+        }
+
+        return submit;
+    }
+
+</script>
+
+<script type="text/javascript">
+    $(function () {
+        $(".detailsTask").click(function () {
+            var uri = '${request.contextPath}/detailsTask.htm';
+            var id = $(this).attr("value");
+            $.ajax({
+                url: uri,
+                type: "post",
+                data: {"id": id},
+                dataType: "json",
+                success: function (result) {
+                    $("#taskList").hide();
+                    $("#taskDetails").show();
+                    $("#taskModifyButton").hide();
+                    $("#title").text("定时任务详细信息");
+                    var data = result.data;
+                    showTaskList(data);
+                    //让文本框不可编辑
+                    $(":input").attr("disabled", "disabled");
+                    //移除点单选框的点击事件
+                    $(".radio").removeAttr("onclick");
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+        $(".modifyTask").click(function () {
+            var uri = '${request.contextPath}/detailsTask.htm';
+            var id = $(this).attr("value");
+            $.ajax({
+                url: uri,
+                type: "post",
+                data: {"id": id},
+                dataType: "json",
+                success: function (result) {
+                    $("#taskList").hide();
+                    $("#taskDetails").show();
+                    $("#taskModifyButton").show();
+                    $("#title").text("修改定时任务信息");
+                    var data = result.data;
+                    showTaskList(data);
+                },
+                error: function () {
+
+                }
+            });
+        });
+
+        $("#modifyButton").click(function () {
+            var invalid = invalidForm();
+            if (invalid) {
+                var uri = '${request.contextPath}/cock/modifyTask.htm';
+                var dialog = jDialog.confirm('确认修改定时任务信息！', {
+                    handler: function (button, dialog) {
+                        dialog.close();
+                        $.ajax({
+                            url: uri,
+                            type: "post",
+                            data: $("#formTask").serialize(),
+                            dataType: "json",
+                            success: function (result) {
+                                message(result.msg)
+                            },
+                            error: function () {
+                                message(result.msg)
+                            }
+                        });
+                    }
+                }, {
+                    handler: function (button, dialog) {
+                        dialog.close();
+                    }
+                });
+            }
+        });
+
+        $(".stopTask").click(function () {
+            var uri = '${request.contextPath}/cock/stopTask.htm';
+            var id = $(this).attr("value");
+            var dialog = jDialog.confirm('确认暂停此项任务！', {
+                handler: function (button, dialog) {
+                    dialog.close();
+                    $.ajax({
+                        url: uri,
+                        type: "post",
+                        data: {"id": id},
+                        dataType: "json",
+                        success: function (result) {
+                            message(result.msg)
+                        },
+                        error: function () {
+                            message(result.msg)
+                        }
+                    });
+                }
+            }, {
+                handler: function (button, dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        $(".restartTask").click(function () {
+            var uri = '${request.contextPath}/cock/restartTask.htm';
+            var id = $(this).attr("value");
+            var dialog = jDialog.confirm('确认重启此项任务！', {
+                handler: function (button, dialog) {
+                    dialog.close();
+                    $.ajax({
+                        url: uri,
+                        type: "post",
+                        data: {"id": id},
+                        dataType: "json",
+                        success: function (result) {
+                            message(result.msg)
+                        },
+                        error: function () {
+                            message(result.msg)
+                        }
+                    });
+                }
+            }, {
+                handler: function (button, dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+        $(".deleteTask").click(function () {
+            var uri = '${request.contextPath}/cock/deleteTask.htm';
+            var id = $(this).attr("value");
+            var dialog = jDialog.confirm('确认删除此项任务！', {
+                handler: function (button, dialog) {
+                    dialog.close();
+                    $.ajax({
+                        url: uri,
+                        type: "post",
+                        data: {"id": id},
+                        dataType: "json",
+                        success: function (result) {
+                            message(result.msg)
+                        },
+                        error: function () {
+                            message(result.msg)
+                        }
+                    });
+                }
+            }, {
+                handler: function (button, dialog) {
+                    dialog.close();
+                }
+            });
+        });
+
+    });
+</script>

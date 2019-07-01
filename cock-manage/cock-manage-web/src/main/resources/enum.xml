@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<root>
+	<enum name="SYNC_STATE">
+		<property name="INIT" value="INIT">未同步</property>
+		<property name="SOURCE" value="SOURCE">未同步</property>
+		<property name="SYNC" value="SYNC">已同步</property>
+	</enum>
+
+
+</root>

@@ -1,0 +1,527 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	
+	<!-- cock -->
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.fengjr</groupId>
+	<artifactId>cock-parent</artifactId>
+	<version>1.0.0-SNAPSHOT</version>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
+	<packaging>pom</packaging>
+	
+	
+	<profiles>
+	
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<!-- zookeeper -->
+			<properties>
+				<!-- 数据库 -->
+				<profile.db.driverClassName>com.mysql.jdbc.Driver</profile.db.driverClassName>
+				<profile.db.url><![CDATA[jdbc:mysql://localhost:3306/db?useUnicode=true&amp;characterEncoding=utf8]]></profile.db.url>
+				<profile.db.username>root</profile.db.username>
+				<profile.db.password><![CDATA[123456]]></profile.db.password>
+				<profile.db.initialSize>1</profile.db.initialSize>
+				<profile.db.maxActive>20</profile.db.maxActive>
+				<profile.db.maxIdle>20</profile.db.maxIdle>
+				<profile.db.minIdle>10</profile.db.minIdle>
+				
+				<profile.zookeeper.config.adress>127.0.0.1:2181</profile.zookeeper.config.adress>
+			</properties>
+			
+		</profile>
+		
+		<profile>
+			<id>beta</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<!-- zookeeper -->
+			<properties>
+
+				<!-- 数据库 -->
+				<profile.db.driverClassName>com.mysql.jdbc.Driver</profile.db.driverClassName>
+				<profile.db.url><![CDATA[jdbc:mysql://localhost:3306/db?useUnicode=true&amp;characterEncoding=utf8]]></profile.db.url>
+				<profile.db.username>root</profile.db.username>
+				<profile.db.password><![CDATA[123456]]></profile.db.password>
+				<profile.db.initialSize>1</profile.db.initialSize>
+				<profile.db.maxActive>20</profile.db.maxActive>
+				<profile.db.maxIdle>20</profile.db.maxIdle>
+				<profile.db.minIdle>10</profile.db.minIdle>
+				
+				<profile.zookeeper.config.adress>127.0.0.1:2181</profile.zookeeper.config.adress>
+			</properties>
+			
+		</profile>
+		
+		<profile>
+			<id>product</id>
+			<activation>
+				<activeByDefault>false</activeByDefault>
+			</activation>
+			<!-- zookeeper -->
+			<properties>
+
+				<!-- 数据库 -->
+				<profile.db.driverClassName>com.mysql.jdbc.Driver</profile.db.driverClassName>
+				<profile.db.url><![CDATA[jdbc:mysql://localhost:3306/db?useUnicode=true&amp;characterEncoding=utf8]]></profile.db.url>
+				<profile.db.username>root</profile.db.username>
+				<profile.db.password><![CDATA[123456]]></profile.db.password>
+				<profile.db.initialSize>1</profile.db.initialSize>
+				<profile.db.maxActive>20</profile.db.maxActive>
+				<profile.db.maxIdle>20</profile.db.maxIdle>
+				<profile.db.minIdle>10</profile.db.minIdle>
+				
+				<profile.zookeeper.config.adress>127.0.0.1:2181</profile.zookeeper.config.adress>
+			</properties>
+			
+		</profile>
+	
+	</profiles>
+	
+	<properties>
+	
+		<encoding>UTF-8</encoding>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<jdk.version>1.6</jdk.version>
+		
+		<spring.version>4.1.6.RELEASE</spring.version>
+		<mybatis.version>3.1.1</mybatis.version>
+		<mybatis.spring.version>1.1.1</mybatis.spring.version>
+		<mysql.version>5.1.13</mysql.version>
+		<velocity.version>1.7</velocity.version>
+		<velocity.tools.version>2.0</velocity.tools.version>
+		
+		<junit.version>3.8.1</junit.version>
+		<servlet.version>2.5</servlet.version>
+		<cglib.vesion>2.2</cglib.vesion>
+		<ezmorph.version>1.0.6</ezmorph.version>
+		<jackson.version>2.4.0</jackson.version>
+		
+		<commons.collections.version>3.2</commons.collections.version>
+		<commons.lang.version>2.6</commons.lang.version>
+		<commons.logging.version>1.1.3</commons.logging.version>
+		<commons.fileupload.version>1.3.1</commons.fileupload.version>
+		<commons.dbcp.version>1.3</commons.dbcp.version>
+		<commons.beanutils.version>1.8.3</commons.beanutils.version>
+		<commons.codec.version>1.6</commons.codec.version>
+		<commons.digester.version>2.0</commons.digester.version>
+		<commons.httpclient.version>3.1</commons.httpclient.version>
+		
+		<httpclient.version>4.5.2</httpclient.version>
+		
+		<aspectj.version>1.6.11</aspectj.version>
+		<csv.version>2.3</csv.version>
+
+		<log4j.version>1.2.9</log4j.version>
+		<slf4j.version>1.7.5</slf4j.version>
+		
+		<current.version>1.0.0-SNAPSHOT</current.version>
+	
+	</properties>
+	
+	<dependencyManagement>
+	
+		<dependencies>
+			
+			<!-- cock-cluster-api -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-cluster-api</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-manage-api -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-api</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-common</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>quartz</artifactId>
+				<version>1.8.6</version>
+			</dependency>
+			
+			<!-- junit -->
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+				<scope>test</scope>
+			</dependency>
+			
+			<!-- servlet -->
+			<dependency>
+				<groupId>javax.servlet</groupId>
+				<artifactId>servlet-api</artifactId>
+				<version>${servlet.version}</version>
+				<scope>provided</scope>
+			</dependency>
+			
+			<!-- ezmorph -->
+			<dependency>
+				<groupId>net.sf.ezmorph</groupId>
+				<artifactId>ezmorph</artifactId>
+				<version>${ezmorph.version}</version>
+			</dependency>
+			
+			<!-- spring -->
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-beans</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-core</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-aop</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-context</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-jdbc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-tx</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-webmvc</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-web</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+				<artifactId>spring-orm</artifactId>
+				<version>${spring.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework</groupId>
+			    <artifactId>spring-context-support</artifactId>
+			    <version>${spring.version}</version>
+			</dependency>
+			
+			<!-- commons -->
+			<dependency>
+				<groupId>commons-collections</groupId>
+				<artifactId>commons-collections</artifactId>
+				<version>${commons.collections.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-lang</groupId>
+				<artifactId>commons-lang</artifactId>
+				<version>${commons.lang.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-logging</groupId>
+				<artifactId>commons-logging</artifactId>
+				<version>${commons.logging.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-fileupload</groupId>
+				<artifactId>commons-fileupload</artifactId>
+				<version>${commons.fileupload.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-dbcp</groupId>
+				<artifactId>commons-dbcp</artifactId>
+				<version>${commons.dbcp.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-beanutils</groupId>
+				<artifactId>commons-beanutils</artifactId>
+				<version>${commons.beanutils.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons.codec.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-digester</groupId>
+				<artifactId>commons-digester</artifactId>
+				<version>${commons.digester.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>commons-httpclient</groupId>
+				<artifactId>commons-httpclient</artifactId>
+				<version>${commons.httpclient.version}</version>
+			</dependency>
+			
+			<!-- httpclient -->
+	        <dependency>
+	            <groupId>org.apache.httpcomponents</groupId>
+	            <artifactId>httpclient</artifactId>
+	            <version>${httpclient.version}</version>
+	        </dependency>
+	        <dependency>
+	            <groupId>org.apache.httpcomponents</groupId>
+	            <artifactId>httpclient-cache</artifactId>
+	            <version>${httpclient.version}</version>
+	        </dependency>
+			
+			<!-- cglib -->
+			<dependency>
+				<groupId>cglib</groupId>
+				<artifactId>cglib</artifactId>
+				<version>${cglib.vesion}</version>
+			</dependency>
+			
+			<!-- aspectj -->
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjrt</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.aspectj</groupId>
+				<artifactId>aspectjweaver</artifactId>
+				<version>${aspectj.version}</version>
+			</dependency>
+
+			<!-- log -->
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-api</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-core</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-classic</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>ch.qos.logback</groupId>
+				<artifactId>logback-access</artifactId>
+				<version>1.1.2</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jul-to-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>log4j-over-slf4j</artifactId>
+				<version>1.7.21</version>
+			</dependency>
+			<!-- log -->
+			
+			<!-- velocity -->
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity</artifactId>
+				<version>${velocity.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.velocity</groupId>
+				<artifactId>velocity-tools</artifactId>
+				<version>${velocity.tools.version}</version>
+				<exclusions>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-core</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-taglib</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.struts</groupId>
+						<artifactId>struts-tiles</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>sslext</groupId>
+						<artifactId>sslext</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>dom4j</groupId>
+						<artifactId>dom4j</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			<!-- Jackson -->
+			<dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-annotations</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-core</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+			
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>page-mybatis</artifactId>
+				<version>2.1.1</version>
+			</dependency>
+			
+			<dependency>
+				<groupId>com.google.code.gson</groupId>
+				<artifactId>gson</artifactId>
+				<version>2.3</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>ognl</groupId>
+			    <artifactId>ognl</artifactId>
+			    <version>3.0.11</version>
+			</dependency>	
+			
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>dubbo</artifactId>
+				<version>2.4.1001</version>
+				<exclusions>
+					<exclusion>
+						<groupId>log4j</groupId>
+						<artifactId>log4j</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.springframework</groupId>
+						<artifactId>spring</artifactId>
+					</exclusion>
+					<exclusion>
+						<groupId>org.apache.zookeeper</groupId>
+						<artifactId>zookeeper</artifactId>
+					</exclusion>
+				</exclusions>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.curator</groupId>
+			    <artifactId>curator-framework</artifactId>
+			    <version>2.4.2</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.curator</groupId>
+			    <artifactId>curator-recipes</artifactId>
+			    <version>2.4.2</version>
+			</dependency>
+			
+			
+			<dependency>
+			    <groupId>dom4j</groupId>
+			    <artifactId>dom4j</artifactId>
+			    <version>1.6.1</version>
+			</dependency>
+			
+			<dependency>
+			    <groupId>org.apache.httpcomponents</groupId>
+			    <artifactId>httpasyncclient</artifactId>
+			    <version>4.1.4</version>
+			</dependency>
+			
+			
+		</dependencies>
+		
+	</dependencyManagement>
+	
+	<build>
+	
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+		
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>3.1</version>
+				<configuration>
+					<source>${jdk.version}</source>
+					<target>${jdk.version}</target>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.1.1</version>
+				<configuration>
+					<packagingExcludes>WEB-INF/web.xml</packagingExcludes>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<encoding>${encoding}</encoding>
+				</configuration>
+			</plugin>
+			
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<version>2.6</version>
+				<configuration>
+					<skip>true</skip>
+				</configuration>
+			</plugin>
+			
+		</plugins>
+		
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources>
+		
+	</build>
+	
+	<modules>
+		<module>cock-cluster</module>
+		<module>cock-manage</module>
+		<module>cock-common</module>
+		<module>quartz</module>
+	</modules>
+
+</project>

@@ -1,0 +1,76 @@
+#PageHeader
+<div class="main-content">
+    <div class="main-content-inner">
+        <!-- #section:basics/content.breadcrumbs -->
+        <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try {
+                    ace.settings.check('breadcrumbs', 'fixed')
+                } catch (e) {
+                }
+            </script>
+
+            <ul class="breadcrumb">
+                <li>
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <span href="title" id="title">服务器定时任务信息列表</span>
+                </li>
+            </ul><!-- /.breadcrumb -->
+        </div>
+
+        <!-- taskList -->
+        <div class="page-content" id="taskList">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <!-- div.dataTables_borderWrap -->
+                            <div>
+                                <table id="" class="table table-striped table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th>任务名称</th>
+                                        <th>corn表达式</th>
+                                        <th class="hidden-480">开始执行时间</th>
+
+                                        <th>
+                                            创建时间
+                                        </th>
+                                        <th class="hidden-480">当前状态</th>
+
+                                        <th>部署机器</th>
+                                    </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        #foreach($item in $listConfig)
+                                        <tr>
+                                            <td>
+                                                <a href="#">$!item.jobName</a>
+                                            </td>
+                                            <td>$!item.jobCron</td>
+                                            <td class="hidden-480">$!item.startTime</td>
+                                            <td>$!item.creationDate</td>
+
+                                            <td class="hidden-480">
+                                                <span class="label label-sm label-info arrowed arrowed-righ">$!item.jobStatus</span>
+                                            </td>
+                                            <td class="hidden-480">
+                                                <span class="label label-sm label-info arrowed arrowed-righ">$!item.loadId</span>
+                                            </td>
+                                        </tr>
+                                        #end
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div>
+        <!-- /taskList -->
+
+    </div>
+</div><!-- /.main-content -->
+
+#PageFooter

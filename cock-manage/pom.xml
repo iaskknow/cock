@@ -1,0 +1,95 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+  <!-- 定时器管理 -->
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+    <groupId>com.fengjr</groupId>
+    <artifactId>cock-parent</artifactId>
+    <version>1.0.0-SNAPSHOT</version>
+  </parent>
+  <artifactId>cock-manage</artifactId>
+	<name>${project.artifactId}</name>
+	<description>${project.artifactId}</description>
+	<packaging>pom</packaging>
+	
+	<profiles>
+		<profile>
+			<id>local</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			
+			<properties>
+				
+				<!-- 编译环境 -->
+				<env>local</env>
+				
+				<!-- 系统名称 -->
+				<profile.project.name>定时器管理</profile.project.name>
+				
+				<!-- 日志 -->
+				<profile.logger.level>INFO</profile.logger.level>
+				<profile.logger.sql>false</profile.logger.sql>
+				<profile.logger.sql.show>INFO</profile.logger.sql.show>
+				<profile.logger.file>D:\\cock-manage.log</profile.logger.file>
+				
+			</properties>
+			
+		</profile>
+		
+	</profiles>
+	
+	<dependencyManagement>
+		
+		<dependencies>
+			
+			<!-- cock-manage-manager -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-manager</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-manage-dao -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-dao</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-manage-domain -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-domain</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+			<!-- cock-manage-service -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-service</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+
+			<!-- cock-manage-rpc -->
+			<dependency>
+				<groupId>com.fengjr</groupId>
+				<artifactId>cock-manage-rpc</artifactId>
+				<version>${current.version}</version>
+			</dependency>
+			
+		</dependencies>
+		
+	</dependencyManagement>
+	
+	<modules>
+		<module>cock-manage-web</module>
+		<module>cock-manage-manager</module>
+		<module>cock-manage-dao</module>
+		<module>cock-manage-domain</module>
+		<module>cock-manage-service</module>
+		<module>cock-manage-rpc</module>
+		<module>cock-manage-api</module>
+	</modules>
+
+</project>
